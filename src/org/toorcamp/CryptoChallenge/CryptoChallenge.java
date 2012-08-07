@@ -22,11 +22,13 @@ public class CryptoChallenge extends Applet implements ToolkitConstants, Toolkit
 	private static byte[] yes = new byte[] { 'Y', 'e', 's' };
 	private static byte[] no = new byte[] { 'N', 'o' };
 	private static byte[] hints = new byte[] { 'H', 'i', 'n', 't', 's' };
-	private static byte[] hint1 = new byte[] { '#', '1' };
-	private static byte[] hint2 = new byte[] { '#', '2' };
-	private static byte[] hint3 = new byte[] { '#', '3' };
+	private static byte[] hint1 = new byte[] { 'X', 'T', 'P', 'L', 'K', 'T', 'G', 'Q', 'L' };
+	private static byte[] hint2 = new byte[] { 'D', 'P', 'Q', 'T', 'D', 'U', 'U', 'U', 'B', 'J', 'I', 'L' };
+	private static byte[] hint3 = new byte[] { 'X', 'P', 'G', 'L', 'K', 'T', 'V', 'T', 'C', 'D', 'J', 'K' };
+	private static byte[] hint4 = new byte[] { 'G', 'X', 'A', 'D', 'H', 'O', 'V', 'K', 'G', 'U', 'P', 'D', 'F', 'P', 'A' };
+	private static byte[] hint5 = new byte[] { 'X', 'P', 'G', 'L', 'K', 'W', 'N', 'T', 'Y', 'G' };
 	
-	private static byte[] hintNames = new byte[] { '1', '2', '3' };
+	private static byte[] hintNames = new byte[] { '1', '2', '3', '4', '5' };
 	
 	private static byte[] credits = new byte [] {
 		'T', 'o', 'o', 'r', 'c', 'a', 'm', 'p', ' ', 'G', 'S', 'M', ' ', 'n', 'e', 't', 'w', 'o', 'r', 'k', ' ', 
@@ -81,7 +83,7 @@ public class CryptoChallenge extends Applet implements ToolkitConstants, Toolkit
 				} else {
 					proHdlr.init(PRO_CMD_SELECT_ITEM, (byte)0x00, (byte)ToolkitConstants.DEV_ID_ME);
 					proHdlr.appendTLV((byte)TAG_ALPHA_IDENTIFIER, hints, (short)0x0000, (short)hints.length);
-					for (byte i = 0; i < 3; i++) {
+					for (byte i = 0; i < 5; i++) {
 						proHdlr.appendTLV((byte)TAG_ITEM, i, hintNames, (short)i, (short)1);
 					}
 					proHdlr.send();
@@ -95,6 +97,10 @@ public class CryptoChallenge extends Applet implements ToolkitConstants, Toolkit
 						hint = hint2;
 					} else if (selItemId == 2) {
 						hint = hint3;
+					} else if (selItemId == 3) {
+						hint = hint4;
+					} else if (selItemId == 4) {
+						hint = hint5;
 					}
 					proHdlr.initDisplayText((byte)0, DCS_8_BIT_DATA, hint, (short)0, 
 							(short)hint.length);
